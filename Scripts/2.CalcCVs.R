@@ -1,9 +1,29 @@
-#calculate uncertainties
+#calculate uncertainty parameters
 
-
-dfComp$DevLnF <- log(dfComp$Forecast.F) - log(dfComp$Ass.F)
+#deviation of logs
+dfComp$DevLnF <- log(dfComp$Forecast.F/dfComp$Ass.F)
 plot(dfComp$Year[!is.na(dfComp$DevLnF)],dfComp$DevLnF[!is.na(dfComp$DevLnF)],
      type="l",ylim=c(-0.5,0.5), xlab="Year", ylab="Ln(ForecastF) - Ln(AssessmentF)")
 abline(h=0)
-#SAD assessment replaced in 2017 by SS3 which devised downwards the recent F
-#the SAD was characterised by significant revision in F
+
+#sd of the log deviations gives the marginal distribution
+sigm.F <- sd(dfComp$DevLnF,na.rm = TRUE)
+#autocorrelation at lag 1
+phi.F <- acf(dfComp$DevLnF[!is.na(dfComp$DevLnF)])[[1]][2,,]
+#conditional SD
+sigc.F <- sigm.F * sqrt(1-phi.F^2)
+
+dfComp$DevLnSSB <- log(dfComp$Forecast.SSB/dfComp$Ass.SSB)
+plot(dfComp$Year[!is.na(dfComp$DevLnSSB)],dfComp$DevLnSSB[!is.na(dfComp$DevLnSSB)],
+     type="l",ylim=c(-0.5,0.5), xlab="Year", ylab="Ln(ForecastSSB) - Ln(AssessmentSSB)")
+abline(h=0)
+
+#sd of the log deviations gives the marginal distribution
+sigm.SSB <- sd(dfComp$DevLnSSB,na.rm = TRUE)
+#autocorrelation at lag 1
+phi.SSB <- acf(dfComp$DevLnSSB[!is.na(dfComp$DevLnSSB)])[[1]][2,,]
+#conditional SD
+sigc.SSB <- sigm.SSB * sqrt(1-phi.SSB^2)
+
+cat("F parameters", sigc.F, phi.F,"\n")
+cat("SSB parameters", sigm.SSB, phi.SSB, "\n")
