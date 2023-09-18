@@ -1,5 +1,8 @@
 #compile assessments
 
+#github link check
+
+
 #read in most recent assessment (WGWIDE 2019)
 load(file=file.path(Ass.dir,"2019 WGWIDE","RData","WGWIDE2019.RData"))
 WG19 <- WHOM.WGWIDE2019
@@ -7,7 +10,7 @@ name(WG19) <- "WGWIDE19"
 rm(WHOM.WGWIDE2019)
 
 #quick look
-#plot(WG19)
+plot(WG19)
 
 dfComp <- data.frame(Year = as.numeric(dimnames(WG19)$year),
                      Catch = as.numeric(FLCore::catch(WG19)),
