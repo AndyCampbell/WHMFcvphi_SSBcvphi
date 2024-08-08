@@ -8,3 +8,5 @@ most recent assessment and the predicted F/SSB from historic forecasts.
 The realised catch and F (Fyr) are taken from the most recent assessment. The annual advice sheets and WG reports issued in y-1 are examined to determine the estimate the F (Fad) that would have been advised to obtain the realised catch (interpolating between two catch options if necessary). The deviation of each year is calculated as ln(Fyr/Fad) and it's standard deviation yields the marginal distribution (sigm).
 
 The conditional standard deviation is then calculated from sigc = sigm * sqrt(1-phi^2) where phi is the autocorrelation of the AR(1) process. sigc and phi are supplied to the two parameter function in EqSim.
+
+Test
