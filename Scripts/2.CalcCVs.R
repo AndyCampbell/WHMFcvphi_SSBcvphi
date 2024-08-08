@@ -31,3 +31,5 @@ sigc.SSB <- sigm.SSB * sqrt(1-phi.SSB^2)
 
 cat("F parameters", sigc.F, phi.F,"\n")
 cat("SSB parameters", sigm.SSB, phi.SSB, "\n")
+
+#test edit
